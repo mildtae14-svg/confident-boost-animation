@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONFIDENT BOOST - Interactive JavaScript Animation</title>
+  <!-- Tailwind CSS via allowlisted gstatic -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#08080C] text-slate-100 min-h-screen">
+
+  <!-- Ambient Golden Background Lights -->
+  <div class="ambient-light-glow bg-[#FFD700] w-[450px] h-[450px] top-[-100px] left-[15%] opacity-20"></div>
+  <div class="ambient-light-glow bg-[#D4AF37] w-[500px] h-[500px] bottom-[5%] right-[10%] opacity-15"></div>
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto px-4 py-8 relative z-20 flex flex-col items-center">
+    
+    <!-- Top Navigation / Header -->
+    <header class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow-500/30 bg-yellow-500/10 text-xs font-semibold uppercase tracking-wider text-yellow-300 mb-3">
+        <span>✨ JavaScript Canvas & 3D Interactive FX</span>
+      </div>
+      <h1 class="serif-title text-3xl md:text-5xl font-extrabold gold-gradient-text tracking-wide mb-2">
+        CONFIDENT BOOST
+      </h1>
+      <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
+        อนิเมชั่นระดับพรีเมียมด้วย HTML5 Canvas, 3D Parallax Tilt, อนุภาคแสงสีทอง (Gold Sparkles) และประกายวิบวับแบบเรียลไทม์
+      </p>
+    </header>
+
+    <!-- Showcase Section: Poster & Controls Grid -->
+    <div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start justify-center">
+      
+      <!-- Left Column: Poster Display Area (5 cols) -->
+      <div class="lg:col-span-6 xl:col-span-5 flex flex-col items-center justify-center">
+        
+        <div class="poster-viewport w-full max-w-[420px]">
+          <div id="poster-card" class="poster-card aspect-[3/4] w-full" style="--mouse-x: 50%; --mouse-y: 50%;">
+            
+            <!-- Poster Static Base Image -->
+            <img src="poster.jpg" alt="CONFIDENT BOOST Mouthwash" class="poster-img">
+
+            <!-- Specular Dynamic Sheen -->
+            <div class="specular-sheen"></div>
+
+            <!-- HTML5 Interactive Particle Canvas Overlay -->
+            <canvas id="animation-canvas" class="animation-canvas"></canvas>
+
+            <!-- Interactive Hotspots -->
+            <!-- 1. Cap Highlight -->
+            <div class="hotspot-node" style="top: 32.5%; left: 65.5%;">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-core"></div>
+              <div class="hotspot-tooltip">ฝาทอง Metallic Luxury Cap</div>
+            </div>
+
+            <!-- 2. Feature 1: ลดกลิ่นปาก -->
+            <div class="hotspot-node" style="top: 49.0%; left: 9.2%;">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-core"></div>
+              <div class="hotspot-tooltip">💎 ลดกลิ่นปากอย่างมีประสิทธิภาพ</div>
+            </div>
+
+            <!-- 3. Feature 2: ลมหายใจสดชื่น -->
+            <div class="hotspot-node" style="top: 56.5%; left: 9.2%;">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-core"></div>
+              <div class="hotspot-tooltip">✨ ลมหายใจสดชื่นยาวนาน</div>
+            </div>
+
+            <!-- 4. Feature 3: ดูแลครบทุกด้าน -->
+            <div class="hotspot-node" style="top: 64.0%; left: 9.2%;">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-core"></div>
+              <div class="hotspot-tooltip">🛡️ ดูแลสุขภาพช่องปากครบทุกด้าน</div>
+            </div>
+
+            <!-- 5. Pedestal Base -->
+            <div class="hotspot-node" style="top: 84.2%; left: 66.5%;">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-core"></div>
+              <div class="hotspot-tooltip">แท่นวางทองคำ Gold Pedestal</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Interactive Hint -->
+        <div class="mt-4 flex items-center gap-2 text-xs text-yellow-200/60">
+          <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path>
+          </svg>
+          <span>เลื่อนเมาส์เพื่อหมุนมิติ 3D หรือคลิกที่โปสเตอร์เพื่อยิงประกายแสง</span>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Control Deck & Code Architecture (7 cols) -->
+      <div class="lg:col-span-6 xl:col-span-7 flex flex-col gap-6 w-full">
+        
+        <!-- Control Panel Glass Card -->
+        <div class="glass-panel rounded-2xl p-6">
+          <div class="flex items-center justify-between border-b border-yellow-500/20 pb-4 mb-5">
+            <h2 class="serif-title text-xl font-bold text-yellow-200 flex items-center gap-2">
+              <span class="text-yellow-400">⚡</span> แผงควบคุมอนิเมชั่น (Control Deck)
+            </h2>
+            <div class="flex items-center gap-2">
+              <button id="btn-burst" class="btn-gold text-xs py-2 px-3">
+                <span>✨</span> สาดประกายทอง
+              </button>
+              <button id="btn-play-pause" class="btn-glass text-xs py-2 px-3">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                พักอนิเมชั่น
+              </button>
+            </div>
+          </div>
+
+          <!-- Presets -->
+          <div class="mb-5">
+            <label class="text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2 block">พรีเซ็ตเอฟเฟกต์ (Effect Presets)</label>
+            <div class="flex flex-wrap gap-2">
+              <button id="preset-luxe" class="btn-glass active text-xs">👑 Luxury Gold</button>
+              <button id="preset-diamond" class="btn-glass text-xs">💎 Diamond Sparkle</button>
+              <button id="preset-minimal" class="btn-glass text-xs">🌿 Subtle Elegance</button>
+            </div>
+          </div>
+
+          <!-- Feature Toggles Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
+            
+            <!-- Toggle 1: 3D Parallax Tilt -->
+            <div class="flex items-center justify-between bg-black/30 p-3 rounded-xl border border-yellow-500/10">
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-slate-200">3D Tilt Parallax</span>
+                <span class="text-xs text-slate-400">หมุนมิติตามตำแหน่งเมาส์</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-tilt" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Toggle 2: Liquid Ribbon -->
+            <div class="flex items-center justify-between bg-black/30 p-3 rounded-xl border border-yellow-500/10">
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-slate-200">Liquid Wave Swirl</span>
+                <span class="text-xs text-slate-400">เกลียวคลื่นน้ำยาบ้วนปาก</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-ribbon" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Toggle 3: Star Flares -->
+            <div class="flex items-center justify-between bg-black/30 p-3 rounded-xl border border-yellow-500/10">
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-slate-200">Star Flares ประกายดาว</span>
+                <span class="text-xs text-slate-400">แสงสะท้อนฝาทองและแก้ว</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-flares" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <!-- Toggle 4: Audio Chimes -->
+            <div class="flex items-center justify-between bg-black/30 p-3 rounded-xl border border-yellow-500/10">
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-slate-200">เสียงคริสตัล (Web Audio)</span>
+                <span class="text-xs text-slate-400">เสียงกังวานเวลาคลิก/โต้ตอบ</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggle-sound">
+                <span class="slider"></span>
+              </label>
+            </div>
+
+          </div>
+
+          <!-- Slider: Density -->
+          <div class="bg-black/30 p-3.5 rounded-xl border border-yellow-500/10">
+            <div class="flex justify-between items-center text-xs mb-2">
+              <span class="font-medium text-slate-300">ความหนาแน่นละอองทอง (Gold Dust Density)</span>
+              <span class="text-yellow-400 font-mono">1.0x</span>
+            </div>
+            <input type="range" id="slider-density" min="0.2" max="2.2" step="0.1" value="1.0" class="w-full">
+          </div>
+
+        </div>
+
+        <!-- Technical Architecture / How it Works Card -->
+        <div class="glass-panel rounded-2xl p-6">
+          <h2 class="serif-title text-lg font-bold text-yellow-200 mb-3 flex items-center gap-2">
+            <span>⚙️</span> โครงสร้างและหลักการทำงานของ JavaScript Animation
+          </h2>
+          
+          <div class="space-y-3 text-xs md:text-sm text-slate-300 leading-relaxed">
+            <div class="flex items-start gap-2.5">
+              <div class="w-6 h-6 rounded-full bg-yellow-500/20 text-yellow-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+              <div>
+                <strong class="text-yellow-200">HTML5 Canvas Overlay:</strong> วาดละอองฝุ่นทอง (Champagne Gold Dust) และโบเก้กลมซอฟต์ (Bokeh Spheres) ด้วย <code class="bg-black/50 px-1 py-0.5 rounded text-yellow-300">globalCompositeOperation = 'screen'</code> เพื่อให้แสงซ้อนทับกันแล้วสว่างจ้าสมจริง
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5">
+              <div class="w-6 h-6 rounded-full bg-yellow-500/20 text-yellow-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+              <div>
+                <strong class="text-yellow-200">4-Point Cross Star Flares:</strong> ใช้สมการตรีโกณมิติ <code class="bg-black/50 px-1 py-0.5 rounded text-yellow-300">Math.sin()</code> ผสม Bezier curves จำลองประกายดาวสะท้อนที่หัวฝาทอง, ขวดเจียระไน และแท่นวางอย่างเป็นธรรมชาติ
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5">
+              <div class="w-6 h-6 rounded-full bg-yellow-500/20 text-yellow-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+              <div>
+                <strong class="text-yellow-200">3D Lerp Parallax & Specular Sheen:</strong> คำนวณองศาหมุนตามตำแหน่งเมาส์ พร้อมระบบ Linear Interpolation (<code class="bg-black/50 px-1 py-0.5 rounded text-yellow-300">current += (target - current) * 0.09</code>) เพื่อความนุ่มนวลระดับ 60fps
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5">
+              <div class="w-6 h-6 rounded-full bg-yellow-500/20 text-yellow-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">4</div>
+              <div>
+                <strong class="text-yellow-200">Web Audio API Sound Engine:</strong> สังเคราะห์เสียงคริสตัลประกายทองด้วยสเกลเพนทาโทนิก ไม่ต้องดาวน์โหลดไฟล์ MP3 ประหยัดเน็ต 100%
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
